@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "901269518221",
+    "project_id": "colour-mixer-d1f89",
+    "storage_bucket": "colour-mixer-d1f89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901269518221:android:52ca70139fb00444bbefc4",
+        "android_client_info": {
+          "package_name": "com.example.colormixerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901269518221-69ssrvksois32pt0usqkee1brtuv0p9h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.colormixerapp",
+            "certificate_hash": "11bbc1882ec4b7b4329454c82b699714dae13d4d"
+          }
+        },
+        {
+          "client_id": "901269518221-67vu97n88dk961jlv9pue3njo8r6obi5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe8q-FztcOUmtoTGwUW0SPC-p2EgDy7WI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "901269518221-67vu97n88dk961jlv9pue3njo8r6obi5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
