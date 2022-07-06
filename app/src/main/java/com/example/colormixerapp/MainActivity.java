@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     TextView colorBox1,colorBox2,colorCode1,colorCode2;
     Button firstColor,secondColor,mix;
 
+    TextView resultColorBox,resultColorCode;
+    Button retryButton;
+
     String displayColor;
     int color1,color2;
 
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         firstColor=(Button) findViewById(R.id.firstColor);
         secondColor=(Button) findViewById(R.id.secondColor);
         mix=(Button) findViewById(R.id.mix);
+
+        resultColorBox=(TextView) findViewById(R.id.resultColorBox);
+        resultColorCode=(TextView) findViewById(R.id.resultColorCode);
+        retryButton=(Button) findViewById(R.id.retryButton);
 
         firstColor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +97,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
                 System.out.println(Integer.toHexString(resultColor));
+                resultColorBox.setBackgroundColor(resultColor);
+                resultColorCode.setText(String.valueOf(Integer.toHexString(resultColor)));
+
+                mix.setVisibility(View.INVISIBLE);
+                resultColorBox.setVisibility(View.VISIBLE);
+                resultColorCode.setVisibility(View.VISIBLE);
+                retryButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mix.setVisibility(View.VISIBLE);
+                resultColorBox.setVisibility(View.INVISIBLE);
+                resultColorCode.setVisibility(View.INVISIBLE);
+                retryButton.setVisibility(View.INVISIBLE);
+
+                colorCode1.setText("");
+                colorBox1.setBackgroundColor(Color.WHITE);
+
+                colorCode2.setText("");
+                colorBox2.setBackgroundColor(Color.WHITE);
             }
         });
     }
