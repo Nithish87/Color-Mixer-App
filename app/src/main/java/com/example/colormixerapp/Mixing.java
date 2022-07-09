@@ -1,20 +1,32 @@
 package com.example.colormixerapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.util.JsonUtils;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 import top.defaults.colorpicker.ColorPickerPopup;
 import yuku.ambilwarna.AmbilWarnaDialog;
+
+
 
 public class Mixing extends AppCompatActivity {
 
@@ -27,11 +39,18 @@ public class Mixing extends AppCompatActivity {
     Button retryButton,saveButton;
 
     String displayColor;
-    int color1=0,color2=0,color3=0,color4=0;
+    int color1=0,color2=0,color3=0,color4=0,resultColor=0;
 
     //Firebase
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    ColorInfo colorInfo;
+
+    //Navigation
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +80,19 @@ public class Mixing extends AppCompatActivity {
 
         //Firebase
         firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("ColorInfo");
+        colorInfo=new ColorInfo();
 
+        //Navigation
+        drawerLayout=findViewById(R.id.my_mixing_layout);
+        actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.nav_open,R.string.nav_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Functions
         firstColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +203,7 @@ public class Mixing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(color4!=0){
-                    int resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
+                    resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
                     resultColor=ColorUtils.blendARGB(resultColor,color3,0.5F);
                     resultColor=ColorUtils.blendARGB(resultColor,color4,0.5F);
 
@@ -181,7 +212,7 @@ public class Mixing extends AppCompatActivity {
                     resultColorCode.setText(String.valueOf(Integer.toHexString(resultColor)));
                 }
                 else if(color3!=0){
-                    int resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
+                    resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
                     resultColor=ColorUtils.blendARGB(resultColor,color3,0.5F);
 
                     fourthColor.setEnabled(false);
@@ -191,7 +222,7 @@ public class Mixing extends AppCompatActivity {
                     resultColorCode.setText(String.valueOf(Integer.toHexString(resultColor)));
                 }
                 else{
-                    int resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
+                    resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
                     System.out.println(Integer.toHexString(resultColor));
                     resultColorBox.setBackgroundColor(resultColor);
                     resultColorCode.setText(String.valueOf(Integer.toHexString(resultColor)));
@@ -201,6 +232,7 @@ public class Mixing extends AppCompatActivity {
                 resultColorBox.setVisibility(View.VISIBLE);
                 resultColorCode.setVisibility(View.VISIBLE);
                 retryButton.setVisibility(View.VISIBLE);
+                saveButton.setVisibility(View.VISIBLE);
             }
         });
 
@@ -236,12 +268,52 @@ public class Mixing extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("Save clicked");
 
+                HashMap<String, Integer>colorMap=new HashMap<>();
+                colorMap.put("Color1",color1);
+                colorMap.put("Color2",color2);
+                colorMap.put("Color3",color3);
+                colorMap.put("Color4",color4);
+                colorMap.put("Result",resultColor);
+
+                databaseReference.push().setValue(colorMap);
+
+                //addDatatoFirebase(color1,color2,color3,color4,resultColor);
             }
         });
     }
 
-    public void openColorPickerDialogue() {
+    private void addDatatoFirebase(int color1, int color2, int color3, int color4, int resultColor) {
+        colorInfo.setColor1(color1);
+        colorInfo.setColor2(color2);
+        colorInfo.setColor3(color3);
+        colorInfo.setColor4(color4);
+        colorInfo.setResult(resultColor);
 
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                System.out.println("Adding values");
+                databaseReference.push().setValue(colorInfo);
+                Toast.makeText(Mixing.this, "Color Saved", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Mixing.this, "Fail to add data "+error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

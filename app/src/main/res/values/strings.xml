@@ -91,4 +91,8 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+
+    <!-- Navigation open and close-->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

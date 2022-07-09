@@ -1,3 +1,5 @@
+package com.example.colormixerapp;
+
 public class ColorInfo {
     private int color1,color2,color3,color4;
     private int result;
@@ -43,4 +45,5 @@ public class ColorInfo {
     public int getResult() {
         return result;
     }
+
 }
