@@ -1,49 +1,104 @@
 package com.example.colormixerapp;
 
-public class ColorInfo {
-    private int color1,color2,color3,color4;
-    private int result;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ColorInfo implements Parcelable {
+    private String color1,color2,color3,color4;
+    private String result;
+    private String name;
 
     public ColorInfo(){}
 
-    public void setColor1(int color1) {
+    public ColorInfo(String color1, String color2, String color3, String color4, String result, String name) {
         this.color1 = color1;
-    }
-
-    public void setColor2(int color2) {
         this.color2 = color2;
-    }
-
-    public void setColor3(int color3) {
         this.color3 = color3;
-    }
-
-    public void setColor4(int color4) {
         this.color4 = color4;
-    }
-
-    public void setResult(int result) {
         this.result = result;
+        this.name = name;
     }
 
-    public int getColor1() {
+    protected ColorInfo(Parcel in) {
+        color1 = in.readString();
+        color2 = in.readString();
+        color3 = in.readString();
+        color4 = in.readString();
+        result = in.readString();
+        name = in.readString();
+    }
+
+    public static final Creator<ColorInfo> CREATOR = new Creator<ColorInfo>() {
+        @Override
+        public ColorInfo createFromParcel(Parcel in) {
+            return new ColorInfo(in);
+        }
+
+        @Override
+        public ColorInfo[] newArray(int size) {
+            return new ColorInfo[size];
+        }
+    };
+
+    public ColorInfo(int color1, int color2, int color3, int color4,int result, String colorID) {
+        this.color1 = String.valueOf(color1);
+        this.color2 = String.valueOf(color2);
+        this.color3 = String.valueOf(color3);
+        this.color4 = String.valueOf(color4);
+        this.result = String.valueOf(result);
+        this.name = colorID;
+    }
+
+    public String getColor1() {
         return color1;
     }
 
-    public int getColor2() {
+
+
+    public String getColor2() {
         return color2;
     }
 
-    public int getColor3() {
+
+
+    public String getColor3() {
         return color3;
     }
 
-    public int getColor4() {
+
+
+    public String getColor4() {
         return color4;
     }
 
-    public int getResult() {
+
+
+    public String getResult() {
         return result;
     }
 
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(color1);
+        dest.writeString(color2);
+        dest.writeString(color3);
+        dest.writeString(color4);
+        dest.writeString(result);
+        dest.writeString(name);
+    }
 }

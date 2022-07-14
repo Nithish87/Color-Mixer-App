@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.util.JsonUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,13 +28,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import top.defaults.colorpicker.ColorPickerPopup;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
+class Info{
+    static String user;
+}
 
-
-public class Mixing extends AppCompatActivity {
+public class Mixing<user> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView colorBox1,colorBox2,colorCode1,colorCode2;
     TextView colorBox3,colorBox4,colorCode3,colorCode4;
@@ -44,13 +53,16 @@ public class Mixing extends AppCompatActivity {
     //Firebase
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    private String colorID;
 
     ColorInfo colorInfo;
 
     //Navigation
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    NavigationView navigationView;
 
+    //User
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,16 +93,27 @@ public class Mixing extends AppCompatActivity {
         //Firebase
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference("ColorInfo");
-        colorInfo=new ColorInfo();
+        //colorInfo=new ColorInfo();
 
         //Navigation
         drawerLayout=findViewById(R.id.my_mixing_layout);
         actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.nav_open,R.string.nav_close);
+        navigationView=findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //User email
+        Bundle extras=getIntent().getExtras();
+        Info.user= extras.getString("User");
+        Intent intent=new Intent(Mixing.this,MainActivity.class);
+        //System.out.println(user);
+        //intent.putExtra("User",user);
+
+
 
         //Functions
         firstColor.setOnClickListener(new View.OnClickListener() {
@@ -270,14 +293,38 @@ public class Mixing extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("Save clicked");
 
-                HashMap<String, Integer>colorMap=new HashMap<>();
-                colorMap.put("Color1",color1);
-                colorMap.put("Color2",color2);
-                colorMap.put("Color3",color3);
-                colorMap.put("Color4",color4);
-                colorMap.put("Result",resultColor);
+                colorID=Info.user;
 
-                databaseReference.push().setValue(colorMap);
+                //Adding data
+                ColorInfo colorInfo=new ColorInfo(color1,color2,color3,color4,resultColor,colorID);
+
+//                databaseReference.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        databaseReference.child(colorID).setValue(colorInfo);
+//                        Toast.makeText(Mixing.this, "Color Saved", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                        Toast.makeText(Mixing.this, "Fail to add data "+error, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+                Map<String, String> colorMap=new HashMap<>();
+                colorMap.put("user",Info.user);
+                colorMap.put("color1", Integer.toHexString(color1));
+                colorMap.put("color2",Integer.toHexString(color2));
+                colorMap.put("color3",Integer.toHexString(color3));
+                colorMap.put("color4",Integer.toHexString(color4));
+                colorMap.put("result",Integer.toHexString(resultColor));
+
+                databaseReference.push().setValue(colorMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(Mixing.this, "Color Saved", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 //addDatatoFirebase(color1,color2,color3,color4,resultColor);
             }
@@ -285,11 +332,11 @@ public class Mixing extends AppCompatActivity {
     }
 
     private void addDatatoFirebase(int color1, int color2, int color3, int color4, int resultColor) {
-        colorInfo.setColor1(color1);
-        colorInfo.setColor2(color2);
-        colorInfo.setColor3(color3);
-        colorInfo.setColor4(color4);
-        colorInfo.setResult(resultColor);
+//        colorInfo.setColor1(color1);
+//        colorInfo.setColor2(color2);
+//        colorInfo.setColor3(color3);
+//        colorInfo.setColor4(color4);
+//        colorInfo.setResult(resultColor);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -315,5 +362,27 @@ public class Mixing extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item){
+        drawerLayout.closeDrawer(GravityCompat.START);
+        if(item.getItemId()==R.id.saved){
+            System.out.println("Saved is clicked");
+            Intent intent=new Intent(Mixing.this,MainActivity.class);
+            System.out.println(Info.user);
+            intent.putExtra("User",Info.user);
+            startActivity(intent);
+        }
+        if (item.getItemId()==R.id.logout){
+            System.out.println("Logout is clicked");
+            logout();
+        }
+        return false;
+    }
+
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();  //logout of user
+        startActivity(new Intent(getApplicationContext(),Login.class));
+        finish();
+    }
 
 }

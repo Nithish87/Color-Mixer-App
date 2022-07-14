@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -28,10 +29,15 @@ public class Login extends AppCompatActivity {
     TextView jCreateButton,forgotTextLink;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
+
+    String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Intent intent=new Intent(Login.this,Mixing.class);
 
         jEmail=findViewById(R.id.Email);
         jPassword=findViewById(R.id.Password);
@@ -45,6 +51,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String email=jEmail.getText().toString().trim();
+                email=jEmail.getText().toString();
+                System.out.println(email);
+                intent.putExtra("User",email);
                 String password=jPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
@@ -66,12 +75,13 @@ public class Login extends AppCompatActivity {
 
                 //authenticate user
 
+                String finalEmail = email;
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Login.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),Mixing.class));
+                            startActivity(intent);
                         }
                         else{
                             Toast.makeText(Login.this,"Error!!! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
