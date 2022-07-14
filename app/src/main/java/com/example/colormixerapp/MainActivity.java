@@ -1,102 +1,139 @@
 package com.example.colormixerapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 import top.defaults.colorpicker.ColorPickerPopup;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyAdapter.ColorClickInterface{
 
-    TextView colorBox1,colorBox2,colorCode1,colorCode2;
-    Button firstColor,secondColor,mix;
+    private RecyclerView recyclerView;
+    private RelativeLayout home;
 
-    String displayColor;
-    int color1,color2;
+    //Firebase
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
+    //Fetch
+    MyAdapter adapter;
+
+    //Array list
+    private ArrayList<ColorInfo> list;
+
+    //User
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        colorBox1= (TextView) findViewById(R.id.colorBox1);
-        colorBox2= (TextView) findViewById(R.id.colorBox2);
-        colorCode1= (TextView) findViewById(R.id.colorCode1);
-        colorCode2= (TextView) findViewById(R.id.colorCode2);
+        System.out.println("Inside MainActivity");
 
-        firstColor=(Button) findViewById(R.id.firstColor);
-        secondColor=(Button) findViewById(R.id.secondColor);
-        mix=(Button) findViewById(R.id.mix);
+        recyclerView=findViewById(R.id.colorsDisplay);
+        home=findViewById(R.id.home);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        firstColor.setOnClickListener(new View.OnClickListener() {
+        //Firebase
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("ColorInfo");
+
+        //Fetch
+        list=new ArrayList<>();
+        adapter=new MyAdapter(list,this,this);
+
+        recyclerView.setAdapter(adapter);
+
+        //User value
+        Bundle extras=getIntent().getExtras();
+        user= extras.getString("User");
+
+        System.out.println("Initializations done");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                new ColorPickerPopup.Builder(MainActivity.this).initialColor(Color.RED)
-                        .enableBrightness(true)
-                        .enableAlpha(true)
-                        .cancelTitle("Choose")
-                        .showIndicator(true)
-                        .showValue(true)
-                        .build()
-                        .show(v,
-                                new ColorPickerPopup.ColorPickerObserver() {
-                                    @Override
-                                    public void onColorPicked(int color) {
-                                        //System.out.println(color);
-                                        //System.out.println(displayColor);
-                                        displayColor=Integer.toHexString(color);
-                                        colorCode1.setText(String.valueOf(displayColor));
-                                        colorBox1.setBackgroundColor(color);
-                                        color1=color;
-                                    }
-                                });
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                System.out.println("inside onDataChange");
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+                    ColorInfo colorInfo = dataSnapshot.getValue(ColorInfo.class);
+                    list.add(colorInfo);
+
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
-        secondColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new ColorPickerPopup.Builder(MainActivity.this).initialColor(Color.RED)
-                        .enableBrightness(true)
-                        .enableAlpha(true)
-                        .cancelTitle("Choose")
-                        .showIndicator(true)
-                        .showValue(true)
-                        .build()
-                        .show(v,
-                                new ColorPickerPopup.ColorPickerObserver() {
-                                    @Override
-                                    public void onColorPicked(int color) {
-                                        //System.out.println(color);
-                                        //System.out.println(displayColor);
-                                        displayColor=Integer.toHexString(color);
-                                        colorCode2.setText(String.valueOf(displayColor));
-                                        colorBox2.setBackgroundColor(color);
-                                        color2=color;
-                                    }
-                                });
-            }
-        });
+        // getAllColors();
+    }
 
-        mix.setOnClickListener(new View.OnClickListener() {
+    private void getAllColors(){
+        list.clear();
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onClick(View v) {
-                int resultColor = ColorUtils.blendARGB(color1, color2, 0.5F);
-                System.out.println(Integer.toHexString(resultColor));
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                list.add(snapshot.getValue(ColorInfo.class));
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
 
-    public void logout(android.view.View view) {
-        FirebaseAuth.getInstance().signOut();  //logout of user
-        startActivity(new Intent(getApplicationContext(),Login.class));
-        finish();
+    @Override
+    public void onColorClick(int position) {
+
     }
 }
