@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -22,6 +23,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
     EditText jEmail,jPassword;
@@ -36,6 +39,10 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Removes status bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent=new Intent(Login.this,Mixing.class);
 
@@ -82,6 +89,7 @@ public class Login extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(Login.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
                             startActivity(intent);
+                            finish();
                         }
                         else{
                             Toast.makeText(Login.this,"Error!!! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -138,5 +146,13 @@ public class Login extends AppCompatActivity {
                 passwordResetDailog.create().show();
             }
         });
+
+        fAuth = FirebaseAuth.getInstance();
+        if (fAuth.getCurrentUser() != null) {
+            Intent intent1=new Intent(getApplicationContext(), Mixing.class);
+            intent1.putExtra("User",email);
+            startActivity(intent1);
+            finish();
+        }
     }
 }

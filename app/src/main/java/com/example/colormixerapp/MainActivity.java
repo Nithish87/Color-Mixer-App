@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import top.defaults.colorpicker.ColorPickerPopup;
 
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ColorCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Removes status bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         System.out.println("Inside MainActivity");
 
         recyclerView=findViewById(R.id.colorsDisplay);
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ColorCl
 
         System.out.println("Initializations done");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("user").equalTo(user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 System.out.println("inside onDataChange");

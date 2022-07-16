@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import top.defaults.colorpicker.ColorPickerPopup;
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -294,6 +296,8 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                 System.out.println("Save clicked");
 
                 colorID=Info.user;
+                FirebaseAuth fAuth = FirebaseAuth.getInstance();
+                colorID=fAuth.getCurrentUser().getUid();
 
                 //Adding data
                 ColorInfo colorInfo=new ColorInfo(color1,color2,color3,color4,resultColor,colorID);
@@ -312,7 +316,7 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
 //                });
 
                 Map<String, String> colorMap=new HashMap<>();
-                colorMap.put("user",Info.user);
+                colorMap.put("user",fAuth.getCurrentUser().getUid());
                 colorMap.put("color1", Integer.toHexString(color1));
                 colorMap.put("color2",Integer.toHexString(color2));
                 colorMap.put("color3",Integer.toHexString(color3));
