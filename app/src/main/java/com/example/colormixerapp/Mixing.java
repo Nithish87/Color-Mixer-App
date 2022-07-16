@@ -1,6 +1,7 @@
 package com.example.colormixerapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
@@ -9,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,6 +73,20 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mixing);
 
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+        // Define ColorDrawable object and parse color
+        // using parseColor method
+        // with color hash code as its parameter
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#DB6B16"));
+
+        // Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+
         colorBox1= (TextView) findViewById(R.id.colorBox1);
         colorBox2= (TextView) findViewById(R.id.colorBox2);
         colorBox3= (TextView) findViewById(R.id.colorBox3);
@@ -115,6 +131,9 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
         //System.out.println(user);
         //intent.putExtra("User",user);
 
+        //Button colors
+        firstColor.setBackgroundColor(Color.parseColor("#8BDA8F"));
+        thirdColor.setBackgroundColor(Color.parseColor("#8BDA8F"));
 
 
         //Functions
