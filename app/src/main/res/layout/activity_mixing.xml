@@ -21,6 +21,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
             android:layout_marginTop="30dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/colorBox2"
             app:layout_constraintTop_toBottomOf="@+id/firstColor" />
@@ -35,6 +36,7 @@
             android:backgroundTint="#8BDA8F"
             android:fontFamily="@font/aclonica"
             android:text="Pick"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/first" />
 
@@ -78,10 +80,10 @@
             android:layout_marginStart="160dp"
             android:layout_marginTop="30dp"
             android:background="@null"
-            android:backgroundTint="#8BDA8F"
-            android:enabled="true"
+            android:enabled="false"
             android:fontFamily="@font/aclonica"
             android:text="Pick"
+            android:textColor="#F4F1F1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstColor" />
 
@@ -92,11 +94,10 @@
             android:layout_marginStart="132dp"
             android:layout_marginTop="15dp"
             android:background="@null"
-            android:backgroundTint="#FF5722"
             android:enabled="false"
             android:fontFamily="@font/aclonica"
             android:text="Mix Colors"
-            android:textColor="#EDE9E9"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result" />
 
@@ -116,6 +117,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
             android:layout_marginTop="15dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/resultColorBox"
             app:layout_constraintTop_toBottomOf="@+id/result" />
@@ -129,6 +131,8 @@
             android:fontFamily="@font/aclonica"
             android:text="Retry"
             android:visibility="invisible"
+            android:background="@null"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mix" />
 
@@ -162,6 +166,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
             android:layout_marginTop="30dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/colorBox3"
             app:layout_constraintTop_toBottomOf="@+id/secondColor" />
@@ -173,11 +178,10 @@
             android:layout_marginStart="160dp"
             android:layout_marginTop="30dp"
             android:background="@null"
-            android:backgroundTint="#8BDA8F"
             android:enabled="false"
             android:fontFamily="@font/aclonica"
             android:text="Pick"
-            android:textColor="#F3EBEB"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/secondColor" />
 
@@ -188,11 +192,10 @@
             android:layout_marginStart="160dp"
             android:layout_marginTop="30dp"
             android:background="@null"
-            android:backgroundTint="#8BDA8F"
             android:enabled="false"
             android:fontFamily="@font/aclonica"
             android:text="Pick"
-            android:textColor="#EDE5E5"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thirdColor" />
 
@@ -212,6 +215,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
             android:layout_marginTop="30dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/colorBox4"
             app:layout_constraintTop_toBottomOf="@+id/thirdColor" />
@@ -238,6 +242,8 @@
             android:fontFamily="@font/aclonica"
             android:text="Save"
             android:visibility="invisible"
+            android:background="@null"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintStart_toEndOf="@+id/retryButton"
             app:layout_constraintTop_toBottomOf="@+id/mix" />
 

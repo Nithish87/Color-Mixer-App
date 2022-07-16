@@ -2,6 +2,7 @@ package com.example.colormixerapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +42,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         System.out.println("Inside onBind");
 
+        holder.color1.setTextColor(Color.parseColor("#"+colorInfo.getColor1()));
         holder.color1Text.setText(colorInfo.getColor1());
-        System.out.println(colorInfo.getColor2());
+        //System.out.println(colorInfo.getColor2());
+
+        holder.color2.setTextColor(Color.parseColor("#"+colorInfo.getColor2()));
         holder.color2Text.setText(colorInfo.getColor2());
-        System.out.println(colorInfo.getColor3());
+        //System.out.println(colorInfo.getColor3());
+
+        holder.color3.setTextColor(Color.parseColor("#"+colorInfo.getColor3()));
         holder.color3Text.setText(colorInfo.getColor3());
-        System.out.println(colorInfo.getColor4());
+        //System.out.println(colorInfo.getColor4());
+
+        holder.color4.setTextColor(Color.parseColor("#"+colorInfo.getColor4()));
         holder.color4Text.setText(colorInfo.getColor4());
-        System.out.println(colorInfo.getResult());
+        //System.out.println(colorInfo.getResult());
+
+        holder.colorR.setTextColor(Color.parseColor("#"+colorInfo.getResult()));
         holder.resultText.setText(colorInfo.getResult());
 
         //setAnimation(holder.itemView,position);
@@ -76,12 +86,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView color1Text,color2Text,color3Text,color4Text;
+        private TextView color1,color2,color3,color4,colorR;
         private TextView resultText;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             System.out.println("TextView set");
+
+            color1=itemView.findViewById(R.id.c1);
+            color2=itemView.findViewById(R.id.c2);
+            color3=itemView.findViewById(R.id.c3);
+            color4=itemView.findViewById(R.id.c4);
+            colorR=itemView.findViewById(R.id.cr);
 
             color1Text=itemView.findViewById(R.id.color1_text);
             color2Text=itemView.findViewById(R.id.color2_text);

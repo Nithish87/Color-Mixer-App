@@ -5,13 +5,14 @@
     android:id="@+id/home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background4"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/colorsDisplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/colorsDisplay"/>
-
+        android:alpha="0.7" />
 
 </RelativeLayout>
 

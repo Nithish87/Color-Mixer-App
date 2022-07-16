@@ -10,6 +10,7 @@
     <color name="background_color"></color>
     <color name="action_bar"></color>
     <color name="border_color">#FFFFFFFF</color>
-    <color name="colorPrimaryDark">#8BDA8F</color>
-    <color name="colorAccent">#DB6B16</color>
+    <color name="button">#DD9983</color>
+    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorAccent">#E91E63</color>
 </resources>

@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,7 +67,6 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
 
-    //User
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,10 +131,6 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
         //System.out.println(user);
         //intent.putExtra("User",user);
 
-        //Button colors
-        firstColor.setBackgroundColor(Color.parseColor("#8BDA8F"));
-        thirdColor.setBackgroundColor(Color.parseColor("#8BDA8F"));
-
 
         //Functions
         firstColor.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +152,10 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                                 firstColor.setVisibility(View.INVISIBLE);
                                 colorBox1.setVisibility(View.VISIBLE);
                                 colorCode1.setVisibility(View.VISIBLE);
+
+                                //secondColor.setBackground(null);
+                                secondColor.setBackgroundColor(Color.parseColor("#8BDA8F"));
+                                secondColor.setEnabled(true);
                             }
                         });
                 colorPickerDialogue.show();
@@ -182,6 +182,8 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                                 colorBox2.setVisibility(View.VISIBLE);
                                 colorCode2.setVisibility(View.VISIBLE);
 
+                                thirdColor.setBackgroundColor(Color.parseColor("#8BDA8F"));
+                                mix.setBackgroundColor(Color.parseColor("#FF5722"));
                                 thirdColor.setEnabled(true);
                                 mix.setEnabled(true);
                             }
@@ -210,6 +212,7 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                                 colorBox3.setVisibility(View.VISIBLE);
                                 colorCode3.setVisibility(View.VISIBLE);
 
+                                fourthColor.setBackgroundColor(Color.parseColor("#8BDA8F"));
                                 fourthColor.setEnabled(true);
                             }
                         });
@@ -287,6 +290,7 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                 resultColorBox.setVisibility(View.INVISIBLE);
                 resultColorCode.setVisibility(View.INVISIBLE);
                 retryButton.setVisibility(View.INVISIBLE);
+                saveButton.setVisibility(View.INVISIBLE);
 
                 colorBox1.setVisibility(View.INVISIBLE);
                 colorBox2.setVisibility(View.INVISIBLE);
@@ -299,13 +303,23 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                 colorCode4.setVisibility(View.INVISIBLE);
 
                 firstColor.setVisibility(View.VISIBLE);
+
+                secondColor.setEnabled(false);
                 secondColor.setVisibility(View.VISIBLE);
-                thirdColor.setVisibility(View.VISIBLE);
-                fourthColor.setVisibility(View.VISIBLE);
+                secondColor.setBackgroundColor(Color.parseColor("#375338"));
+                //secondColor.setBackgroundColor(Color.TRANSPARENT);
 
                 thirdColor.setEnabled(false);
+                thirdColor.setVisibility(View.VISIBLE);
+                thirdColor.setBackgroundColor(Color.parseColor("#375338"));
+
                 fourthColor.setEnabled(false);
+                fourthColor.setVisibility(View.VISIBLE);
+                fourthColor.setBackgroundColor(Color.parseColor("#375338"));
+
                 mix.setEnabled(false);
+                mix.setBackgroundColor(Color.parseColor("#DD9983"));
+
             }
         });
 
@@ -317,6 +331,8 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                 colorID=Info.user;
                 FirebaseAuth fAuth = FirebaseAuth.getInstance();
                 colorID=fAuth.getCurrentUser().getUid();
+
+                System.out.println(colorID);
 
                 //Adding data
                 ColorInfo colorInfo=new ColorInfo(color1,color2,color3,color4,resultColor,colorID);
@@ -335,7 +351,7 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
 //                });
 
                 Map<String, String> colorMap=new HashMap<>();
-                colorMap.put("user",fAuth.getCurrentUser().getUid());
+                colorMap.put("user",colorID);
                 colorMap.put("color1", Integer.toHexString(color1));
                 colorMap.put("color2",Integer.toHexString(color2));
                 colorMap.put("color3",Integer.toHexString(color3));
