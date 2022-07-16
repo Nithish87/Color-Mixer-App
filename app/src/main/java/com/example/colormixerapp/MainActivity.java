@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ColorCl
 
         System.out.println("Initializations done");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("user").equalTo(user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 System.out.println("inside onDataChange");
