@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/drawable/back.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/drawable/button.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/drawable/rounded_corner.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_main2.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_mixing.xml" value="0.25" />
+        <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_mixing.xml" value="0.264" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_mixing2.xml" value="0.2359375" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/layout/activity_saved_colors.xml" value="0.25" />

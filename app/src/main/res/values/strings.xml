@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ColorMIxerApp</string>
+    <string name="app_name">Color Mixer</string>
     <string name="title_activity_mixing">Mixing</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

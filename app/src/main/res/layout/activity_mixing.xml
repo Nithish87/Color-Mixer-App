@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_mixing_layout"
+    android:background="@drawable/background5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Mixing">
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,18 +20,23 @@
             android:layout_width="120dp"
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/colorBox2"
-            app:layout_constraintTop_toBottomOf="@+id/second" />
+            app:layout_constraintTop_toBottomOf="@+id/firstColor" />
 
         <Button
             android:id="@+id/firstColor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="160dp"
             android:layout_marginTop="15dp"
+            android:background="@null"
+            android:backgroundTint="#8BDA8F"
+            android:fontFamily="@font/aclonica"
             android:text="Pick"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/first" />
 
@@ -40,6 +48,7 @@
             android:layout_marginTop="15dp"
             android:baselineAligned="false"
             android:visibility="invisible"
+            android:background="@drawable/button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/first" />
 
@@ -48,10 +57,10 @@
             android:layout_width="120dp"
             android:layout_height="33dp"
             android:layout_marginStart="58dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/second" />
+            app:layout_constraintTop_toBottomOf="@+id/firstColor" />
 
         <TextView
             android:id="@+id/colorCode1"
@@ -59,29 +68,36 @@
             android:layout_height="33dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="15dp"
-            android:visibility="invisible"
+            android:textSize="22sp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@+id/firstColor"
             app:layout_constraintTop_toBottomOf="@+id/first" />
 
         <Button
             android:id="@+id/secondColor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="160dp"
-            android:layout_marginTop="15dp"
-            android:enabled="true"
+            android:layout_marginTop="30dp"
+            android:background="@null"
+            android:enabled="false"
+            android:fontFamily="@font/aclonica"
             android:text="Pick"
+            android:textColor="#F4F1F1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/second" />
+            app:layout_constraintTop_toBottomOf="@+id/firstColor" />
 
         <Button
             android:id="@+id/mix"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="132dp"
             android:layout_marginTop="15dp"
+            android:background="@null"
             android:enabled="false"
+            android:fontFamily="@font/aclonica"
             android:text="Mix Colors"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result" />
 
@@ -101,6 +117,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
             android:layout_marginTop="15dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/resultColorBox"
             app:layout_constraintTop_toBottomOf="@+id/result" />
@@ -111,125 +128,108 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="58dp"
             android:layout_marginTop="15dp"
+            android:fontFamily="@font/aclonica"
             android:text="Retry"
             android:visibility="invisible"
+            android:background="@null"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mix" />
+
 
         <TextView
             android:id="@+id/first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="20dp"
-            android:text="First Color:"
-            android:textSize="20sp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/aclonica"
+            android:text="Select colors to mix"
+            android:textColor="#090909"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="15dp"
-            android:text="Second Color:"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstColor" />
-
-        <TextView
-            android:id="@+id/third"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="15dp"
-            android:text="Third Color:"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/secondColor" />
 
         <TextView
             android:id="@+id/colorBox3"
             android:layout_width="120dp"
             android:layout_height="33dp"
             android:layout_marginStart="58dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/third" />
+            app:layout_constraintTop_toBottomOf="@+id/secondColor" />
 
         <TextView
             android:id="@+id/colorCode3"
             android:layout_width="120dp"
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/colorBox3"
-            app:layout_constraintTop_toBottomOf="@+id/third" />
+            app:layout_constraintTop_toBottomOf="@+id/secondColor" />
 
         <Button
             android:id="@+id/thirdColor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="160dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
+            android:background="@null"
             android:enabled="false"
+            android:fontFamily="@font/aclonica"
             android:text="Pick"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/third" />
+            app:layout_constraintTop_toBottomOf="@+id/secondColor" />
 
         <Button
             android:id="@+id/fourthColor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="160dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
+            android:background="@null"
             android:enabled="false"
+            android:fontFamily="@font/aclonica"
             android:text="Pick"
+            android:textColor="#FFF4F1F1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fourth" />
+            app:layout_constraintTop_toBottomOf="@+id/thirdColor" />
 
         <TextView
             android:id="@+id/colorBox4"
             android:layout_width="120dp"
             android:layout_height="33dp"
             android:layout_marginStart="58dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fourth" />
+            app:layout_constraintTop_toBottomOf="@+id/thirdColor" />
 
         <TextView
             android:id="@+id/colorCode4"
             android:layout_width="120dp"
             android:layout_height="33dp"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
+            android:textSize="22sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/colorBox4"
-            app:layout_constraintTop_toBottomOf="@+id/fourth" />
-
-        <TextView
-            android:id="@+id/fourth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="15dp"
-            android:text="Fourth Color:"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thirdColor" />
 
         <TextView
             android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="15dp"
-            android:text="Result:"
-            android:textSize="20sp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/aclonica"
+            android:text="Result"
+            android:textColor="#090808"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fourthColor" />
 
@@ -239,8 +239,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="116dp"
             android:layout_marginTop="15dp"
+            android:fontFamily="@font/aclonica"
             android:text="Save"
             android:visibility="invisible"
+            android:background="@null"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintStart_toEndOf="@+id/retryButton"
             app:layout_constraintTop_toBottomOf="@+id/mix" />
 

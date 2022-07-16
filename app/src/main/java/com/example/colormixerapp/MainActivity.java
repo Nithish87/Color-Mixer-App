@@ -77,8 +77,11 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ColorCl
         recyclerView.setAdapter(adapter);
 
         //User value
-        Bundle extras=getIntent().getExtras();
-        user= extras.getString("User");
+        /*Bundle extras=getIntent().getExtras();
+        user= extras.getString("User");*/
+
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        user=fAuth.getCurrentUser().getUid();
 
         System.out.println("Initializations done");
 
