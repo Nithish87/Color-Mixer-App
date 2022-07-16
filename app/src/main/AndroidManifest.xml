@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ColorMIxerApp">
         <activity
-            android:name=".SavedColors"
-            android:exported="false" />
-        <activity
             android:name=".Mixing"
             android:exported="false" />
         <activity
