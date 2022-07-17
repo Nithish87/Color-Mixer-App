@@ -50,12 +50,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.color2Text.setText(colorInfo.getColor2());
         //System.out.println(colorInfo.getColor3());
 
-        holder.color3.setTextColor(Color.parseColor("#"+colorInfo.getColor3()));
-        holder.color3Text.setText(colorInfo.getColor3());
+
+        if(colorInfo.getColor3().equals("0")){
+            holder.color3Text.setText("No color selected");
+        }
+        else{
+            holder.color3.setTextColor(Color.parseColor("#"+colorInfo.getColor3()));
+            holder.color3Text.setText(colorInfo.getColor3());
+        }
         //System.out.println(colorInfo.getColor4());
 
-        holder.color4.setTextColor(Color.parseColor("#"+colorInfo.getColor4()));
-        holder.color4Text.setText(colorInfo.getColor4());
+        if(colorInfo.getColor4().equals("0")){
+            holder.color4Text.setText("No color selected");
+        }
+        else{
+            holder.color4.setTextColor(Color.parseColor("#"+colorInfo.getColor4()));
+            holder.color4Text.setText(colorInfo.getColor4());
+        }
         //System.out.println(colorInfo.getResult());
 
         holder.colorR.setTextColor(Color.parseColor("#"+colorInfo.getResult()));
