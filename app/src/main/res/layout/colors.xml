@@ -22,7 +22,8 @@
             android:layout_marginBottom="3dp"
             android:padding="4dp"
             android:text="Color 1: "
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -34,7 +35,8 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/c1"
             android:text="C1"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/c2"
@@ -45,7 +47,8 @@
             android:layout_marginTop="10dp"
             android:padding="5dp"
             android:text="Color 2: "
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/color2_text"
@@ -56,7 +59,8 @@
             android:layout_marginTop="22dp"
             android:layout_toRightOf="@+id/c2"
             android:text="C2"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -68,7 +72,8 @@
             android:layout_marginTop="10dp"
             android:padding="5dp"
             android:text="Color 3: "
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/color3_text"
@@ -79,7 +84,8 @@
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/c3"
             android:text="C3"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -91,7 +97,8 @@
             android:layout_marginTop="10dp"
             android:padding="5dp"
             android:text="Color 4: "
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/color4_text"
@@ -102,7 +109,8 @@
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/c4"
             android:text="C4"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -113,7 +121,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="Result color: "
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/result_text"
@@ -125,7 +134,8 @@
             android:layout_toRightOf="@id/cr"
             android:padding="5dp"
             android:text="result"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>

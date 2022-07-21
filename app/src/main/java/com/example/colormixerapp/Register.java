@@ -45,7 +45,7 @@ public class Register extends AppCompatActivity {
         progressBar=findViewById(R.id.progressBar);
 
         if(fAuth.getCurrentUser() !=null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(),Login.class));
             finish();
         }
 
@@ -78,7 +78,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Register.this,"User Created Successfully",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),Login.class));
                         }
                         else {
                             Toast.makeText(Register.this, "Error!!! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

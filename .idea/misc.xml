@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.162" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/drawable/button.xml" value="0.162" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/layout/activity_login.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/layout/activity_main.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/layout/activity_mixing.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/layout/activity_register.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/layout/colors.xml" value="0.20244565217391305" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/menu/menu_mixing.xml" value="0.25" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Color-Mixer-App/app/src/main/res/menu/navigation_menu.xml" value="0.25" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/drawable/back.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/drawable/button.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Nithish/AndroidStudioProjects/ColorMIxerApp/app/src/main/res/drawable/rounded_corner.xml" value="0.26614583333333336" />
