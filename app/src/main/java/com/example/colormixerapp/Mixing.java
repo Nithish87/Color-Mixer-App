@@ -280,6 +280,11 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                 resultColorCode.setVisibility(View.VISIBLE);
                 retryButton.setVisibility(View.VISIBLE);
                 saveButton.setVisibility(View.VISIBLE);
+
+                firstColor.setEnabled(false);
+                secondColor.setEnabled(false);
+                thirdColor.setEnabled(false);
+                fourthColor.setEnabled(false);
             }
         });
 
@@ -303,6 +308,7 @@ public class Mixing<user> extends AppCompatActivity implements NavigationView.On
                 colorCode4.setVisibility(View.INVISIBLE);
 
                 firstColor.setVisibility(View.VISIBLE);
+                firstColor.setEnabled(true);
 
                 secondColor.setEnabled(false);
                 secondColor.setVisibility(View.VISIBLE);
